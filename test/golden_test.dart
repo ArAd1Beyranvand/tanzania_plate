@@ -26,22 +26,33 @@ void main() {
   /// category id -> (spec, theme, space-separated sample value)
   final Map<String, (PlateSpec, PlateTheme, String)> cases =
       <String, (PlateSpec, PlateTheme, String)>{
-        'private': (
-          TanzaniaPlates.private,
-          TanzaniaThemes.private,
-          '9 9 5 A G T',
-        ),
+        'private': (TanzaniaPlates.private, TanzaniaThemes.private, '995 AGT'),
         'private_two_row': (
           TanzaniaPlates.privateTwoRow,
           TanzaniaThemes.privateTwoRow,
-          '9 4 0 A G Y',
+          '940 AGY',
         ),
         'organisation': (
           TanzaniaPlates.organisation,
           TanzaniaThemes.organisation,
-          '2 5 8 7 4 4',
+          '258 744',
         ),
       };
+
+  test('each spec is two fields, complete when both are full', () {
+    for (final PlateSpec spec in TanzaniaPlates.all) {
+      expect(spec.slots.length, 2, reason: spec.id);
+      expect(spec.slots.every((s) => s.length == 3), isTrue, reason: spec.id);
+    }
+    final PlateController c = PlateController.fromValues(
+      TanzaniaPlates.private,
+      ['995', 'AG'],
+    );
+    expect(c.isCompleted, isFalse);
+    c.setAt(1, 'AGT');
+    expect(c.isCompleted, isTrue);
+    c.dispose();
+  });
 
   for (final MapEntry<String, (PlateSpec, PlateTheme, String)> c
       in cases.entries) {
@@ -70,6 +81,9 @@ void main() {
             ),
           ),
         ),
+      );
+      await tester.runAsync(
+        () => Future<void>.delayed(const Duration(milliseconds: 300)),
       );
       await tester.pumpAndSettle();
       await expectLater(

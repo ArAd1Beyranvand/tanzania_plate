@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/widgets.dart' show AssetImage;
 import 'package:plate_alphabet/plate_alphabet.dart';
 import 'package:plate_core/plate_core.dart';
@@ -124,7 +126,7 @@ abstract final class TanzaniaPlates {
     background: PlateSection.plain,
     decals: const <PlateDecal>[PlateDecal(image: _flag, box: _Layout.oneFlag)],
     slots: <PlateSlot>[
-      ..._group(
+      _group(
         TanzaniaAlphabets.digits,
         3,
         _Layout.oneDigit,
@@ -132,7 +134,7 @@ abstract final class TanzaniaPlates {
         0,
         _Layout.height,
       ),
-      ..._group(
+      _group(
         TanzaniaAlphabets.letters,
         3,
         _Layout.oneLetter,
@@ -145,8 +147,8 @@ abstract final class TanzaniaPlates {
       _label('T', _Layout.oneT, _Layout.oneDigitPitch, 0, _Layout.height),
     ],
     textGroups: const <PlateTextGroup>[
-      PlateTextGroup(<int>[0, 1, 2], key: 'number'),
-      PlateTextGroup(<int>[3, 4, 5], key: 'letters'),
+      PlateTextGroup(<int>[0], key: 'number'),
+      PlateTextGroup(<int>[1], key: 'letters'),
     ],
   );
 
@@ -191,7 +193,7 @@ abstract final class TanzaniaPlates {
         ),
       ],
       slots: <PlateSlot>[
-        ..._group(
+        _group(
           TanzaniaAlphabets.digits,
           3,
           l.digit * w,
@@ -199,7 +201,7 @@ abstract final class TanzaniaPlates {
           l.box1Top,
           l.box1,
         ),
-        ..._group(
+        _group(
           organisation ? TanzaniaAlphabets.digits : TanzaniaAlphabets.letters,
           3,
           l.row2 * w,
@@ -216,32 +218,26 @@ abstract final class TanzaniaPlates {
       textGroups: <PlateTextGroup>[
         PlateTextGroup(const <int>[
           0,
-          1,
-          2,
         ], key: organisation ? 'organisation' : 'number'),
         PlateTextGroup(const <int>[
-          3,
-          4,
-          5,
+          1,
         ], key: organisation ? 'number' : 'letters'),
       ],
     );
   }
 
-  static List<PlateSlot> _group(
+  static PlateSlot _group(
     PlateAlphabet alphabet,
     int count,
     double firstCx,
     double pitch,
     double top,
     double height,
-  ) => plateRegister(
+  ) => PlateSlot(
     alphabet: alphabet,
-    count: count,
-    left: firstCx - pitch / 2,
-    top: top,
-    width: pitch,
-    height: height,
+    box: PlateBox(firstCx - pitch / 2, top, count * pitch, height),
+    length: count,
+    spacing: max(0, pitch - 0.6 * 0.72 * height),
   );
 
   static PlateLabel _label(
