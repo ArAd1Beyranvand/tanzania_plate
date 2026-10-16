@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:flutter/widgets.dart' show AssetImage;
+import 'package:flutter/widgets.dart' show Color, Offset;
 import 'package:plate_alphabet/plate_alphabet.dart';
 import 'package:plate_core/plate_core.dart';
 
@@ -89,10 +89,12 @@ class _Two {
 /// plate, the national-park plate, and the diplomatic-mission, military and
 /// older series. The hologram sticker is not drawn.
 abstract final class TanzaniaPlates {
-  static const AssetImage _flag = AssetImage(
-    'assets/icons/flag_of_tanzania.png',
-    package: 'tanzania_plate',
-  );
+  static const PlateDrawing _flag = PlateDrawing(72, 48, <PlateShape>[
+    PlateRectShape(0, 0, 72, 48, Color(0xFF00A3DD)),
+    PlatePolygonShape(<Offset>[Offset(0, 48), Offset(0, 0), Offset(72, 0)], Color(0xFF1EB53A)),
+    PlatePolygonShape(<Offset>[Offset(0, 36.582), Offset(54.873, 0), Offset(72, 0), Offset(72, 11.418), Offset(17.127, 48), Offset(0, 48)], Color(0xFFFCD116)),
+    PlatePolygonShape(<Offset>[Offset(0, 40.188), Offset(60.282, 0), Offset(72, 0), Offset(72, 7.812), Offset(11.718, 48), Offset(0, 48)], Color(0xFF000000)),
+  ]);
 
   static final PlateSpec private = PlateSpec(
     id: 'tz.private',
@@ -102,7 +104,7 @@ abstract final class TanzaniaPlates {
     noPanel: true,
     panel: const PlatePanel(box: PlateBox(0, 0, 0, 0)),
     background: PlateSection.plain,
-    decals: const <PlateDecal>[PlateDecal(image: _flag, box: _Layout.oneFlag)],
+    decals: const <PlateDecal>[PlateDecal(drawing: _flag, box: _Layout.oneFlag)],
     slots: <PlateSlot>[
       _group(
         TanzaniaAlphabets.digits,
@@ -161,7 +163,7 @@ abstract final class TanzaniaPlates {
       background: PlateSection.plain,
       decals: <PlateDecal>[
         PlateDecal(
-          image: _flag,
+          drawing: _flag,
           box: PlateBox(
             l.flag.left * w,
             l.flag.top,
