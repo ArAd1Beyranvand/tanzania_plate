@@ -6,30 +6,17 @@ import 'package:plate_core/plate_core.dart';
 
 import 'tanzania_country.dart';
 
-/// Where the ink sits, in plate units, from the flattened photographs
-/// (`.plateref/tz/flat_*`, 4 px per unit).
+/// Ink positions in plate units, from the flattened photographs.
 ///
-/// One row (`Tanzanian_License_plate`, 520×110 as the article gives): ink y
-/// 18–95 (77 tall). `T` centred 106, digits `995` centred 171, 220, 269
-/// (pitch 49), letters `AGT` 380, 425, 470 (pitch 45). Flag x 12.5–65, y 54–86.
-/// A 77-tall ink would need a 140 box on a 110 plate, so the box is the full
-/// height and the ink lands near 60, about 78% of reference.
+/// The one-row plate is the article's 520x110. A 77-tall ink would need a 140
+/// box on a 110 plate, so the box is the full height and the ink lands near
+/// 78% of reference.
 ///
-/// Two rows. The article gives one size, 520×110, but the two-row photographs
-/// are 1.87 (private) and 1.47 (organisation) wide; flattened to 520×110 they
-/// are stretched about 2.5 times, so the canvas takes the photo's own aspect at
-/// height 110 and every x below is a fraction of the flat's 520. The true
-/// millimetre size of a two-row plate is not in the article.
-/// - Private (`TANZANIA_2000_s…woody1778a`, 206 wide): row 1 ink y 10–53.3,
-///   `T` .309, digits .4615, .590, .719 (pitch .129); row 2 ink y 60–102.5,
-///   letters .440, .574, .708 (pitch .134). Flag x .043–.19, y 11.75–29.
-/// - Organisation (`Tanzania_vehicle_registration_Diplomatic_plates`, 162
-///   wide): row 1 ink y 10.4–52, `T` .2875, digits .4475 + k·.1325; row 2 ink y
-///   58.5–101, `CD` centred .296, digits .548 + k·.1375. Flag x .019–.181,
-///   y 10–29.
-/// Two-row ink is 43 tall; a box centred on it is at most 63 (private) before
-/// it leaves the canvas, so the ink is about 35 (81%). The organisation plate's
-/// narrower pitch caps the box near 50, ink about 27.
+/// The two-row photographs are far narrower than the article's size, which is
+/// not known for them, so the canvas takes each photo's own aspect at height
+/// 110 and every x is a fraction of the width. A box centred on the 43-tall
+/// ink is at most 63 (private) before it leaves the canvas; the organisation
+/// plate's narrower pitch caps its box near 50.
 abstract final class _Layout {
   static const double oneRowWidth = 520, height = 110;
   static const double oneT = 106, oneDigit = 171, oneDigitPitch = 49;
@@ -93,24 +80,15 @@ class _Two {
   final double? cd;
 }
 
-/// The Tanzanian plates, one ink on one field with the national flag at the
-/// left.
-///
 /// [private] is `T 995 AGT` on one row (groups `number`, `letters`);
 /// [privateTwoRow] stacks `T 940` over `AGY`; [organisation] is the white on
 /// blue plate of an international organisation, `T 258` over `CD 744` (groups
 /// `organisation`, `number`).
 ///
-/// Not implemented, each for want of a usable reference: the Zanzibar
-/// motorcycle plate (the photo is 1.04 wide with a Zanzibar emblem that
-/// cannot be placed on the article's size); the national-park plate (the plate
-/// fills under two thirds of its flat's height on a yellow field, while the
-/// article says green with `01JUL` series, so neither can be trusted); the
-/// green-and-yellow diplomatic-mission, military (white on black) and older
-/// series. The `United_Kingdom_license_plate_T811_BFE` picture is a British
-/// plate, not Tanzanian. The hologram sticker is not drawn.
+/// Not implemented, for want of a usable reference: the Zanzibar motorcycle
+/// plate, the national-park plate, and the diplomatic-mission, military and
+/// older series. The hologram sticker is not drawn.
 abstract final class TanzaniaPlates {
-  // Flag: https://commons.wikimedia.org/wiki/File:Flag_of_Tanzania.svg
   static const AssetImage _flag = AssetImage(
     'assets/icons/flag_of_tanzania.png',
     package: 'tanzania_plate',

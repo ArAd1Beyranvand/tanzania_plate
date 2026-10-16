@@ -2,8 +2,7 @@ import 'package:plate_core/plate_core.dart';
 
 import 'tanzania_colors.dart';
 
-/// Tanzania as a `PlateCountry`. The plates have no side band; the national
-/// flag is a decal on each spec, so there is no panel and no caption.
+/// No side band; the flag is a decal on each spec.
 abstract final class TanzaniaCountry {
   static const PlateCountry tanzania = PlateCountry(
     code: 'tz',

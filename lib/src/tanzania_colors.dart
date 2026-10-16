@@ -1,10 +1,8 @@
 import 'package:flutter/widgets.dart';
 
-/// Sampled from the flattened photographs (modal pixel of the region, balanced
-/// against the photo). The article says "yellow" and "blue"; the pixels give a
-/// warm `E1C246` on the one-row plate and a deeper `B98614` on the two-row
-/// photo, which carries its own lighting, so they are two themes. The blue is
-/// the international-organisation plate, white on `3B8FD0`.
+/// Modal pixels of the flattened photographs. The two-row photo carries its
+/// own lighting and reads deeper than the one-row plate, so they are two
+/// themes. [blue] is the international-organisation plate.
 abstract final class TanzaniaColors {
   static const Color yellow = Color(0xFFE1C246);
   static const Color yellowInk = Color(0xFF3B2B2F);

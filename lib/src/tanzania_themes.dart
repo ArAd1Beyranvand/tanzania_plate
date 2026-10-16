@@ -15,7 +15,6 @@ abstract final class TanzaniaThemes {
     TanzaniaColors.amberInk,
   );
 
-  /// International organisations: white on blue.
   static final PlateTheme organisation = _flat(
     TanzaniaColors.blue,
     TanzaniaColors.blueInk,

@@ -1,6 +1,6 @@
 /// Tanzania's licence plates for the `plate_core` library.
 ///
-/// TODO one sentence: categories, colours, themes, alphabets, advisory validator.
+/// Private one- and two-row and international-organisation plates, with themes, alphabets and an advisory validator.
 library;
 
 export 'src/tanzania_colors.dart';
