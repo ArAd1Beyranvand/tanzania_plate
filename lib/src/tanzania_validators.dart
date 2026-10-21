@@ -14,17 +14,14 @@ class TanzaniaValidator extends GatedPlateValidator {
   static const String reasonCode = 'The organisation code is 200 to 399.';
   static const String reasonCar = 'The car number is three digits.';
 
+  static final RegExp _code = RegExp(r'^[23][0-9]{2}$');
   static final RegExp _letters = RegExp(r'^[A-Z]{3}$');
 
   @override
   PlateValidation judge(PlateEntry entry) {
     final String organisation = entry.group('organisation');
     if (organisation.isNotEmpty) {
-      final int? code = int.tryParse(organisation);
-      if (organisation.length != 3 ||
-          code == null ||
-          code < 200 ||
-          code > 399) {
+      if (!_code.hasMatch(organisation)) {
         return const PlateValidation.invalid(reasonCode);
       }
       if (!isDigitsOfLength(entry.group('number'), 3)) {

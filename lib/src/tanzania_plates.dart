@@ -91,9 +91,27 @@ class _Two {
 abstract final class TanzaniaPlates {
   static const PlateDrawing _flag = PlateDrawing(72, 48, <PlateShape>[
     PlateRectShape(0, 0, 72, 48, Color(0xFF00A3DD)),
-    PlatePolygonShape(<Offset>[Offset(0, 48), Offset(0, 0), Offset(72, 0)], Color(0xFF1EB53A)),
-    PlatePolygonShape(<Offset>[Offset(0, 36.582), Offset(54.873, 0), Offset(72, 0), Offset(72, 11.418), Offset(17.127, 48), Offset(0, 48)], Color(0xFFFCD116)),
-    PlatePolygonShape(<Offset>[Offset(0, 40.188), Offset(60.282, 0), Offset(72, 0), Offset(72, 7.812), Offset(11.718, 48), Offset(0, 48)], Color(0xFF000000)),
+    PlatePolygonShape(<Offset>[
+      Offset(0, 48),
+      Offset(0, 0),
+      Offset(72, 0),
+    ], Color(0xFF1EB53A)),
+    PlatePolygonShape(<Offset>[
+      Offset(0, 36.582),
+      Offset(54.873, 0),
+      Offset(72, 0),
+      Offset(72, 11.418),
+      Offset(17.127, 48),
+      Offset(0, 48),
+    ], Color(0xFFFCD116)),
+    PlatePolygonShape(<Offset>[
+      Offset(0, 40.188),
+      Offset(60.282, 0),
+      Offset(72, 0),
+      Offset(72, 7.812),
+      Offset(11.718, 48),
+      Offset(0, 48),
+    ], Color(0xFF000000)),
   ]);
 
   static final PlateSpec private = PlateSpec(
@@ -104,7 +122,9 @@ abstract final class TanzaniaPlates {
     noPanel: true,
     panel: const PlatePanel(box: PlateBox(0, 0, 0, 0)),
     background: PlateSection.plain,
-    decals: const <PlateDecal>[PlateDecal(drawing: _flag, box: _Layout.oneFlag)],
+    decals: const <PlateDecal>[
+      PlateDecal(drawing: _flag, box: _Layout.oneFlag),
+    ],
     slots: <PlateSlot>[
       _group(
         TanzaniaAlphabets.digits,
