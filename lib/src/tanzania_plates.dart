@@ -91,11 +91,7 @@ class _Two {
 abstract final class TanzaniaPlates {
   static const PlateDrawing _flag = PlateDrawing(72, 48, <PlateShape>[
     PlateRectShape(0, 0, 72, 48, Color(0xFF00A3DD)),
-    PlatePolygonShape(<Offset>[
-      Offset(0, 48),
-      Offset(0, 0),
-      Offset(72, 0),
-    ], Color(0xFF1EB53A)),
+    PlatePolygonShape(<Offset>[Offset(0, 48), Offset(0, 0), Offset(72, 0)], Color(0xFF1EB53A)),
     PlatePolygonShape(<Offset>[
       Offset(0, 36.582),
       Offset(54.873, 0),
@@ -122,9 +118,7 @@ abstract final class TanzaniaPlates {
     noPanel: true,
     panel: const PlatePanel(box: PlateBox(0, 0, 0, 0)),
     background: PlateSection.plain,
-    decals: const <PlateDecal>[
-      PlateDecal(drawing: _flag, box: _Layout.oneFlag),
-    ],
+    decals: const <PlateDecal>[PlateDecal(drawing: _flag, box: _Layout.oneFlag)],
     slots: <PlateSlot>[
       _group(
         TanzaniaAlphabets.digits,
@@ -143,19 +137,14 @@ abstract final class TanzaniaPlates {
         _Layout.height,
       ),
     ],
-    labels: <PlateLabel>[
-      _label('T', _Layout.oneT, _Layout.oneDigitPitch, 0, _Layout.height),
-    ],
+    labels: <PlateLabel>[_label('T', _Layout.oneT, _Layout.oneDigitPitch, 0, _Layout.height)],
     textGroups: const <PlateTextGroup>[
       PlateTextGroup(<int>[0], key: 'number'),
       PlateTextGroup(<int>[1], key: 'letters'),
     ],
   );
 
-  static final PlateSpec privateTwoRow = _twoRow(
-    'tz.private.two_row',
-    _Layout.private,
-  );
+  static final PlateSpec privateTwoRow = _twoRow('tz.private.two_row', _Layout.private);
 
   static final PlateSpec organisation = _twoRow(
     'tz.organisation',
@@ -163,11 +152,7 @@ abstract final class TanzaniaPlates {
     organisation: true,
   );
 
-  static List<PlateSpec> get all => <PlateSpec>[
-    private,
-    privateTwoRow,
-    organisation,
-  ];
+  static List<PlateSpec> get all => <PlateSpec>[private, privateTwoRow, organisation];
 
   static PlateSpec _twoRow(String id, _Two l, {bool organisation = false}) {
     final double w = l.width;
@@ -184,23 +169,11 @@ abstract final class TanzaniaPlates {
       decals: <PlateDecal>[
         PlateDecal(
           drawing: _flag,
-          box: PlateBox(
-            l.flag.left * w,
-            l.flag.top,
-            l.flag.width * w,
-            l.flag.height,
-          ),
+          box: PlateBox(l.flag.left * w, l.flag.top, l.flag.width * w, l.flag.height),
         ),
       ],
       slots: <PlateSlot>[
-        _group(
-          TanzaniaAlphabets.digits,
-          3,
-          l.digit * w,
-          pitch1,
-          l.box1Top,
-          l.box1,
-        ),
+        _group(TanzaniaAlphabets.digits, 3, l.digit * w, pitch1, l.box1Top, l.box1),
         _group(
           organisation ? TanzaniaAlphabets.digits : TanzaniaAlphabets.letters,
           3,
@@ -212,16 +185,11 @@ abstract final class TanzaniaPlates {
       ],
       labels: <PlateLabel>[
         _label('T', l.t * w, pitch1, l.box1Top, l.box1),
-        if (l.cd != null)
-          _label('CD', l.cd! * w, pitch2 * 2, l.box2Top, l.box2),
+        if (l.cd != null) _label('CD', l.cd! * w, pitch2 * 2, l.box2Top, l.box2),
       ],
       textGroups: <PlateTextGroup>[
-        PlateTextGroup(const <int>[
-          0,
-        ], key: organisation ? 'organisation' : 'number'),
-        PlateTextGroup(const <int>[
-          1,
-        ], key: organisation ? 'number' : 'letters'),
+        PlateTextGroup(const <int>[0], key: organisation ? 'organisation' : 'number'),
+        PlateTextGroup(const <int>[1], key: organisation ? 'number' : 'letters'),
       ],
     );
   }
@@ -240,15 +208,10 @@ abstract final class TanzaniaPlates {
     spacing: max(0, pitch - 0.6 * 0.72 * height),
   );
 
-  static PlateLabel _label(
-    String text,
-    double cx,
-    double width,
-    double top,
-    double height,
-  ) => PlateLabel(
-    text: text,
-    box: PlateBox(cx - width / 2, top, width, height),
-    glyphHeight: height,
-  );
+  static PlateLabel _label(String text, double cx, double width, double top, double height) =>
+      PlateLabel(
+        text: text,
+        box: PlateBox(cx - width / 2, top, width, height),
+        glyphHeight: height,
+      );
 }
