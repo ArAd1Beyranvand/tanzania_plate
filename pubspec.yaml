@@ -1,7 +1,7 @@
 name: tanzania_plate
 description: "Tanzania's licence plates for the plate_core library: yellow private plates in one and two rows and the blue organisation plate, with themes, alphabets and an advisory validator."
 version: 0.1.0
-publish_to: none
+repository: https://github.com/ArAd1Beyranvand/tanzania_plate
 resolution: workspace
 
 environment:
