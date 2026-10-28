@@ -27,8 +27,16 @@ void main() {
   final Map<String, (PlateSpec, PlateTheme, String)> cases =
       <String, (PlateSpec, PlateTheme, String)>{
         'private': (TanzaniaPlates.private, TanzaniaThemes.private, '995 AGT'),
-        'private_two_row': (TanzaniaPlates.privateTwoRow, TanzaniaThemes.privateTwoRow, '940 AGY'),
-        'organisation': (TanzaniaPlates.organisation, TanzaniaThemes.organisation, '258 744'),
+        'private_two_row': (
+          TanzaniaPlates.privateTwoRow,
+          TanzaniaThemes.privateTwoRow,
+          '940 AGY',
+        ),
+        'organisation': (
+          TanzaniaPlates.organisation,
+          TanzaniaThemes.organisation,
+          '258 744',
+        ),
       };
 
   test('each spec is two fields, complete when both are full', () {
@@ -36,17 +44,24 @@ void main() {
       expect(spec.slots.length, 2, reason: spec.id);
       expect(spec.slots.every((s) => s.length == 3), isTrue, reason: spec.id);
     }
-    final PlateController c = PlateController.fromValues(TanzaniaPlates.private, ['995', 'AG']);
+    final PlateController c = PlateController.fromValues(
+      TanzaniaPlates.private,
+      ['995', 'AG'],
+    );
     expect(c.isCompleted, isFalse);
     c.setAt(1, 'AGT');
     expect(c.isCompleted, isTrue);
     c.dispose();
   });
 
-  for (final MapEntry<String, (PlateSpec, PlateTheme, String)> c in cases.entries) {
+  for (final MapEntry<String, (PlateSpec, PlateTheme, String)> c
+      in cases.entries) {
     testWidgets(c.key, (tester) async {
       final (PlateSpec spec, PlateTheme theme, String values) = c.value;
-      final PlateController controller = PlateController.fromValues(spec, values.split(' '));
+      final PlateController controller = PlateController.fromValues(
+        spec,
+        values.split(' '),
+      );
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -67,9 +82,14 @@ void main() {
           ),
         ),
       );
-      await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 300)));
+      await tester.runAsync(
+        () => Future<void>.delayed(const Duration(milliseconds: 300)),
+      );
       await tester.pumpAndSettle();
-      await expectLater(find.byType(PlateView), matchesGoldenFile('goldens/tz_${c.key}.png'));
+      await expectLater(
+        find.byType(PlateView),
+        matchesGoldenFile('goldens/tz_${c.key}.png'),
+      );
       await tester.pumpWidget(const SizedBox.shrink());
       controller.dispose();
     });
