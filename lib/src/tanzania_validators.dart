@@ -1,5 +1,8 @@
 import 'package:plate_core/plate_core.dart';
 
+// TODO(py): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
+// TODO(ts): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
+// TODO(kt): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
 /// A fixed `T`, three digits, three letters; the organisation plate is `T`, a
 /// three-digit code (200 to 399), `CD` and a three-digit number. Reports,
 /// never bars a keystroke.
@@ -14,6 +17,9 @@ class TanzaniaValidator extends GatedPlateValidator {
   static const String reasonCode = 'The organisation code is 200 to 399.';
   static const String reasonCar = 'The car number is three digits.';
 
+  // TODO(py): [H9] Python re: \d/\w match Unicode; keep explicit [0-9]/[A-Z] classes (or re.ASCII).
+  // TODO(ts): [H9] same flavour as Dart; port as is, cover accept/reject in the vectors (D9).
+  // TODO(kt): [H9] Regex engine differs per target (JVM/JS/Native): keep to portable syntax.
   static final RegExp _code = RegExp(r'^[23][0-9]{2}$');
   static final RegExp _letters = RegExp(r'^[A-Z]{3}$');
 
