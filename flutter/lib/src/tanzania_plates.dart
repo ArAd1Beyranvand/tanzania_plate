@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/widgets.dart' show Color, Offset;
 import 'package:plate_alphabet/plate_alphabet.dart';
 import 'package:plate_core/plate_core.dart';
@@ -119,8 +117,6 @@ abstract final class TanzaniaPlates {
     country: TanzaniaCountry.tanzania,
     canvasWidth: _Layout.oneRowWidth,
     canvasHeight: _Layout.height,
-    noPanel: true,
-    panel: const PlatePanel(box: PlateBox(0, 0, 0, 0)),
     background: PlateSection.plain,
     decals: const <PlateDecal>[
       PlateDecal(drawing: _flag, box: _Layout.oneFlag),
@@ -146,10 +142,7 @@ abstract final class TanzaniaPlates {
     labels: <PlateLabel>[
       _label('T', _Layout.oneT, _Layout.oneDigitPitch, 0, _Layout.height),
     ],
-    textGroups: const <PlateTextGroup>[
-      PlateTextGroup(<int>[0], key: 'number'),
-      PlateTextGroup(<int>[1], key: 'letters'),
-    ],
+    textGroups: PlateTextGroup.perSlot(<String>['number', 'letters']),
   );
 
   static final PlateSpec privateTwoRow = _twoRow(
@@ -170,16 +163,13 @@ abstract final class TanzaniaPlates {
   ];
 
   static PlateSpec _twoRow(String id, _Two l, {bool organisation = false}) {
-    final double w = l.width;
-    final double pitch1 = l.digitPitch * w;
+    final double w = l.width, pitch1 = l.digitPitch * w;
     final double pitch2 = l.row2Pitch * w;
     return PlateSpec(
       id: id,
       country: TanzaniaCountry.tanzania,
       canvasWidth: w,
       canvasHeight: _Layout.height,
-      noPanel: true,
-      panel: const PlatePanel(box: PlateBox(0, 0, 0, 0)),
       background: PlateSection.plain,
       decals: <PlateDecal>[
         PlateDecal(
@@ -233,11 +223,13 @@ abstract final class TanzaniaPlates {
     double pitch,
     double top,
     double height,
-  ) => PlateSlot(
-    alphabet: alphabet,
-    box: PlateBox(firstCx - pitch / 2, top, count * pitch, height),
-    length: count,
-    spacing: max(0, pitch - 0.6 * 0.72 * height),
+  ) => plateRun(
+    alphabet,
+    count,
+    left: firstCx - pitch / 2,
+    top: top,
+    pitch: pitch,
+    height: height,
   );
 
   static PlateLabel _label(

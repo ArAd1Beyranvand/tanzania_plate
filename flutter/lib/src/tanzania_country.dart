@@ -6,7 +6,6 @@ import 'tanzania_colors.dart';
 abstract final class TanzaniaCountry {
   static const PlateCountry tanzania = PlateCountry(
     code: 'tz',
-    captionLines: <String>[],
     panelColor: TanzaniaColors.yellow,
     panelTextColor: TanzaniaColors.yellowInk,
   );

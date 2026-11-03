@@ -24,7 +24,6 @@ abstract final class TanzaniaThemes {
 PlateTheme _flat(Color field, Color ink) => PlateTheme.monochrome(
   field: field,
   ink: ink,
-  inactive: TanzaniaColors.inactive,
   borderWidthRatio: 0,
   plateRadiusRatio: 0.05,
 );

@@ -12,6 +12,4 @@ abstract final class TanzaniaColors {
 
   static const Color blue = Color(0xFF3B8FD0);
   static const Color blueInk = Color(0xFFF3F3F3);
-
-  static const Color inactive = Color(0xFFB0B0B0);
 }
